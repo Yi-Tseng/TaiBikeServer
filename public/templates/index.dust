@@ -1,0 +1,9 @@
+{>"layouts/master" /}
+
+{<title}
+	Hello World!
+{/title}
+
+{<body}
+    <h1>{msg}</h1>
+{/body}

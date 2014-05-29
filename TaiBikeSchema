@@ -1,0 +1,37 @@
+weathers {
+		location:String, 
+		time:Date, 
+		temperature:Number, 
+		weatherType:String, 
+		humidity:Number
+}
+
+
+equpment {
+	name:String, 
+	weight:Number
+}
+
+point {
+	latitude:Number, 
+	longitude:Number, 
+	altitude:Number
+}
+
+ridePlain {
+	name:String, 
+	timeStart:Date, 
+	timeEnd:Date, 
+	points:[pointSchema], 
+	records:[pointSchema]
+}
+
+users {
+	account:{type:String, unique:true}, 
+	password:String, 
+	name:String, 
+	equpments:[equpmentSchema], 
+	ridePlains:[ridePlainSchema], 
+	authKey:{type:String, unique:true}, 
+	authKeyExpire:Date
+}
