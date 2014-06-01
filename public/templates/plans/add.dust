@@ -1,0 +1,100 @@
+{> "layouts/master" /}
+
+
+{<navBar}
+<a class="active item" href='/'>
+	<i class="home icon"></i>
+	TaiBike
+</a>
+<a class="item scroll" href='/user'>
+	<i class="user icon"></i>
+	我的資料
+</a>
+<a class="active item scroll" href = '/user/plan'>
+	<i class="unordered list icon"></i>
+	騎乘計畫
+</a>
+<a class="item scroll" href = '#'>
+	<i class="globe icon"></i>
+	騎乘記錄
+</a>
+<div class="right menu">
+	<a class="item" href='/logout'>
+		<i class="user icon"></i>
+		登出
+	</a>
+</div>
+{/navBar}
+
+{<body}
+<div class='ui segment' style='margin: 10px'>
+	<div class="ui form segment" id='form'>
+		<input type='hidden' id='csrf' value='{_csrf}' />
+		<div class="ui error message">
+			<div class="header">錯誤</div>
+			<p lingdex="15" id='msg'>錯誤</p>
+		</div>
+		<div class="two fields" ng-app='MapApp' ng-controller='MapController'>
+
+			<div class='field'>
+				<label>地圖</label>
+				<div id="map-canvas"></div>
+			</div>
+			<div class='field'>
+				<label>座標及時間（雙擊新增）</label>
+				<table class="ui table segment">
+				<thead>
+					<tr><th>名稱</th>
+					<th>座標</th>
+					<th>時間</th>
+					<th>管理</th>
+				</tr></thead>
+				<tbody ng-repeat="i in items">
+					<tr>
+						<td><input ng-model='i.name' /></td>
+						<td>[[i.location]]</td>
+						<td><input type='datetime-local' ng-model='i.date' /></td>
+						<td>
+							<div class="ui icon buttons">
+								<div class="ui button" ng-click='locate(i)'>
+									<i class="location icon"></i>
+								</div>
+
+								<div class="ui button" ng-click='del(i)'>
+									<i class="remove icon"></i>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			</div>
+		</div>
+
+		<div class="field">
+			<label>名稱</label>
+			<input placeholder="計畫名稱" type="text" id='name'>
+		</div>
+		<div class="field">
+			<label>簡介</label>
+			<input placeholder="計畫簡介" type="text" id='discription'>
+		</div>
+		<div class="field">
+			<label>日期與時間</label>
+			<input placeholder="計畫日期與時間" type="text" id='time'>
+		</div>
+
+
+
+		<div class="ui green submit button" id='button-add'>新增計畫</div>
+	</div>
+</div>
+{/body}
+
+
+
+{<js}
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyAm_gwxQVaA7c5X-1JxDgoIYCcTemlJZAY"></script>
+<script type="text/javascript" src='/js/angular.min.js'></script>
+<script type="text/javascript" src='/js/add_plan.js'></script>
+{/js}

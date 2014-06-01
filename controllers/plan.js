@@ -6,6 +6,22 @@ var keyAuth = require('../lib/auth');
 
 module.exports = function (app) {
 
+
+	app.get('/user/add-plan', function(req, res) {
+		var authKey = req.session.authKey;
+		if (authKey === '' || authKey === undefined) {
+			res.redirect('/');
+		} else {
+			keyAuth(authKey, function(msg) {
+				if(msg.error) {
+					res.redirect('/');
+				} else {
+					var ridePlans = msg.user.ridePlans;
+					res.render('plans/add');
+				}
+			});
+		}
+	});
 	app.get('/api/plan/add', function (req, res) {
 		var authKey = req.param('authKey');
 
