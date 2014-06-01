@@ -1,42 +1,42 @@
 'use strict';
-
+var favicon = require('serve-favicon');
 
 var kraken = require('kraken-js'),
-    db = require('./lib/database'), 
-    app = {}
-    ;
+	db = require('./lib/database'),
+	app = {}
+	;
 
 
 app.configure = function configure(nconf, next) {
 
-    db.config(nconf.get('databaseConfig'));
+	db.config(nconf.get('databaseConfig'));
 
-    // Async method run on startup.
-    next(null);
+	// Async method run on startup.
+	next(null);
 };
 
 
 app.requestStart = function requestStart(server) {
-    // Run before most express middleware has been registered.
+	// Run before most express middleware has been registered.
+	server.use(favicon(__dirname + '/public/favicon.ico'));
 };
 
 
 app.requestBeforeRoute = function requestBeforeRoute(server) {
-    // Run before any routes have been added.
+	// Run before any routes have been added.
 };
 
 
 app.requestAfterRoute = function requestAfterRoute(server) {
-    // Run after all routes have been added.
+	// Run after all routes have been added.
 };
 
-
 if (require.main === module) {
-    kraken.create(app).listen(function (err, server) {
-        if (err) {
-            console.error(err.stack);
-        }
-    });
+	kraken.create(app).listen(function (err, server) {
+		if (err) {
+			console.error(err.stack);
+		}
+	});
 }
 
 

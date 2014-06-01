@@ -5,9 +5,10 @@ var pointSchema = require('./point');
 
 
 module.exports = mongoose.Schema({
-	name:String, 
-	timeStart:Date, 
-	timeEnd:Date, 
-	points:[pointSchema], 
+	name:String,
+	description:String,
+	timeStart:Date,
+	timeEnd:Date,
+	points:[pointSchema],
 	records:[pointSchema]
 });

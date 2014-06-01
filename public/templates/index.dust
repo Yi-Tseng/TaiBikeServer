@@ -1,9 +1,66 @@
 {>"layouts/master" /}
 
 {<title}
-	Hello World!
+	Welcome!
 {/title}
 
+{<navBar}
+<a class="active item" href='#main'>
+	<i class="home icon"></i>
+	TaiBike
+</a>
+<a class="item scroll" href = '#about'>
+	<i class="browser icon"></i>
+	關於 Taibike
+</a>
+<a class="item scroll" href = '#feature'>
+	<i class="user icon"></i>
+	功能特色
+</a>
+<a class="item scroll" href = '#contact'>
+	<i class="mail icon"></i>
+	聯絡我們
+</a>
+<div class="right menu">
+	<a class="item" id='btnLogin' href='/login'>
+		<i class="user icon"></i>
+		登入
+	</a>
+</div>
+{/navBar}
+
 {<body}
-    <h1>{msg}</h1>
+
+<section class='ui tertiary inverted segment' style="padding-top: 210px;padding-bottom: 210px;margin: 10px 10px;" id='main'>
+	<div class='first-page'>
+		<h1 class='huge-text'>TaiBike</h1>
+		<p>A Bike APP For Taiwan</p>
+	</div>
+</section>
+
+<section class='ui tertiary inverted segment' style="padding-top: 210px;padding-bottom: 210px;margin: 10px 10px;" id='about'>
+	<h1>關於 TaiBike</h1>
+	<p>本專案主要是希望能夠解決進階騎乘使用者，在準備階段以及騎乘階段可能會遇到的問題，例如路線準備、裝備需求準備以及即時路況等等；而本專案另一個目的則是希望能透過本專案所提供的應用，能夠推廣單車騎乘運動給初階騎乘者。</p>
+</section>
+
+<section class='ui tertiary inverted segment' style="padding-top: 210px;padding-bottom: 210px;margin: 10px 10px;" id='feature'>
+	<h1>功能特色</h1>
+	<h3>時間預測、意外評估</h3>
+	<p>可依照使用者所需，協助安排時間，以及預測騎乘時間，也會依照當天的路況以及氣象等因素，去分析可能會遇到的情況。</p>
+	<h3>裝備規劃、重量計算及評估</h3>
+	<p>使用者可先輸入既有的裝備，程式可以依照天氣以及使用者所擁有的裝備去規劃，也可以協助使用者去計算裝備重量。</p>
+	<h3>路線導航、團隊路線</h3>
+	<p>依照已經定好的路線，可以給予使用者路線引導，在導航中也可以顯示其他有安裝本 App 車友且在團隊中的位置資訊，若有人超前或是落後了也會給予提示訊息。</p>
+	<h3>天氣、路況</h3>
+	<p>天氣以及路況可以根據車友或是其他使用者的即時回饋，天氣的部分還可以依據中央氣象局所提供的天氣資訊。</p>
+	<h3>路線分享</h3>
+	<p>在完成一次旅程之後，可以在事後分享這趟旅行所記錄到的行車記錄，時間的戳記。</p>
+</section>
+
+<section class='ui tertiary inverted segment' style="padding-top: 210px;padding-bottom: 210px;margin: 10px 10px;" id='contact' align='center'>
+	<h1>聯絡我們</h1>
+	<p>Email : <a href="mailto:contact@taibike.com.tw">contact@taibike.com.tw</a></p>
+</section>
+
+
 {/body}

@@ -1,0 +1,60 @@
+{> "layouts/master" /}
+
+
+
+{<navBar}
+<a class="active item" href='/'>
+	<i class="home icon"></i>
+	TaiBike
+</a>
+<div class="right menu">
+	<a class="item" id='btnLogin' href='/login'>
+		<i class="user icon"></i>
+		登入
+	</a>
+</div>
+{/navBar}
+
+
+{<body}
+<div class='ui piled segment'>
+	<div class="ui form segment" id='form'>
+		<input type='hidden' id='csrf' value='{_csrf}' />
+		<div class="ui error message">
+			<div class="header">錯誤</div>
+			<p lingdex="15" id='msg'>錯誤</p>
+		</div>
+		<div class="field">
+			<label>帳號</label>
+			<input placeholder="帳號" type="text" id='account'>
+		</div>
+		<div class="field">
+			<label>密碼</label>
+			<input placeholder="Username" type="password" id='password'>
+		</div>
+		<div class="field">
+			<label>在輸入一次密碼</label>
+			<input placeholder="Username" type="password" id='pwd2'>
+		</div>
+		<div class="field">
+			<label>姓名</label>
+			<input placeholder="Username" type="text" id='name'>
+		</div>
+
+
+		<div class="inline field">
+			<div class="ui checkbox">
+				<input id='check' type="checkbox" />
+				<label for='check'>我已閱讀以及同意<a href='#'>使用條款</a></label>
+			</div>
+		</div>
+		<div class="ui blue submit button" id='button-submit'>註冊</div>
+	</div>
+</div>
+{/body}
+
+
+{<js}
+	<script type="text/javascript" src='/js/register.js'></script>
+{/js}
+

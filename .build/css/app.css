@@ -1,8 +1,35 @@
-/* line 3, /Users/takeshi/Desktop/TaiBikeServer/app */
+/* line 2, /Users/takeshi/Desktop/TaiBikeServer/app */
 body {
-  width: 100%;
+  padding-top: 43px;
 }
-/* line 5, /Users/takeshi/Desktop/TaiBikeServer/app */
-body h1 {
-  color: #eeeeee;
+/* line 6, /Users/takeshi/Desktop/TaiBikeServer/app */
+h1 {
+  font-size: 2.5em;
+}
+/* line 9, /Users/takeshi/Desktop/TaiBikeServer/app */
+h3 {
+  font-size: 1.5em;
+}
+/* line 14, /Users/takeshi/Desktop/TaiBikeServer/app */
+footer {
+  margin: 10px 10px;
+}
+/* line 18, /Users/takeshi/Desktop/TaiBikeServer/app */
+.huge-text {
+  font-size: 5em;
+}
+/* line 22, /Users/takeshi/Desktop/TaiBikeServer/app */
+.index-box {
+  margin-top: 210px;
+  margin-bottom: 210px;
+}
+/* line 27, /Users/takeshi/Desktop/TaiBikeServer/app */
+.first-page {
+  /*margin-top: 210px;
+	margin-bottom: 210px;*/
+  margin-left: 40%;
+}
+/* line 34, /Users/takeshi/Desktop/TaiBikeServer/app */
+#user-info p {
+  margin: 1em;
 }

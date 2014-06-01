@@ -1,0 +1,37 @@
+{> "layouts/master" /}
+
+{<navBar}
+<a class="active item" href='/'>
+	<i class="home icon"></i>
+	TaiBike
+</a>
+<a class="active item scroll" href='/user'>
+	<i class="user icon"></i>
+	我的資料
+</a>
+<a class="item scroll" href = '/user/plan'>
+	<i class="unordered list icon"></i>
+	騎乘計畫
+</a>
+<a class="item scroll" href = '#'>
+	<i class="globe icon"></i>
+	騎乘記錄
+</a>
+<div class="right menu">
+	<a class="item" href='/logout'>
+		<i class="user icon"></i>
+		登出
+	</a>
+</div>
+{/navBar}
+
+{<body}
+	<div class="ui raised segment" style="margin:20px;" id="user-info">
+		<div class="ui ribbon label">帳號</div>
+		<p lingdex="8">{user.account}</p>
+		<div class="ui teal ribbon label">姓名</div>
+		<p lingdex="9">{user.name}</p>
+		<div class="ui red ribbon label">計畫總數</div>
+		<p lingdex="10">{user.ridePlans.length}</p>
+	</div>
+{/body}

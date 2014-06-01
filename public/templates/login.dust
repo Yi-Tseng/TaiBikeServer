@@ -1,0 +1,47 @@
+{> "layouts/master" /}
+
+{<navBar}
+<a class="active item" href='/'>
+	<i class="home icon"></i>
+	TaiBike
+</a>
+{/navBar}
+{<body}
+	<input type='hidden' id='csrf' value='{_csrf}' />
+	<section class='ui stacked segment' style="margin: 10px;">
+		<h1>登入</h1>
+		<div class="ui form segment">
+		  <div class="field">
+		    <label>帳號</label>
+		    <div class="ui left labeled icon input">
+		      <input id='account' type="text" placeholder="請輸入帳號">
+		      <i class="user icon"></i>
+		      <div class="ui corner label">
+		        <i class="icon asterisk"></i>
+		      </div>
+		    </div>
+		  </div>
+		  <div class="field">
+		    <label>密碼</label>
+		    <div class="ui left labeled icon input">
+		      <input id='password' type="password">
+		      <i class="lock icon"></i>
+		      <div class="ui corner label">
+		        <i class="icon asterisk"></i>
+		      </div>
+		    </div>
+		  </div>
+		  <div class="ui error message" id='msg'>
+		    <div class="header">帳號或是密碼輸入錯誤</div>
+		  </div>
+		  <div class="ui green submit button" id='btn-login'>登入</div>
+
+		  <a class="ui blue submit button" id='btn-login' href="/register" style='margin-left: 10px'>註冊</a>
+		</div>
+	</section>
+
+{/body}
+
+{<js}
+	<script type="text/javascript" src='js/login.js'></script>
+{/js}

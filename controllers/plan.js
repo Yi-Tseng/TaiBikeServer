@@ -8,7 +8,7 @@ module.exports = function (app) {
 
 	app.get('/api/plan/add', function (req, res) {
 		var authKey = req.param('authKey');
-		
+
 		keyAuth(authKey, function(msg) {
 			if(msg.error) {
 				res.send(msg);
@@ -55,7 +55,7 @@ module.exports = function (app) {
 				points = JSON.parse(points);
 
 				var ridePlains = msg.user.ridePlains;
-				
+
 				if (!ridePlains.id(pid)) {
 					res.send({msg:'can\'t find plan', error:true});
 					return;
@@ -80,7 +80,7 @@ module.exports = function (app) {
 
 	app.get('/api/plan/record/add', function (req, res) {
 		var authKey = req.param('authKey');
-		
+
 		keyAuth(authKey, function(msg) {
 			if(msg.error) {
 				res.send(msg);
@@ -90,7 +90,7 @@ module.exports = function (app) {
 				var lat = req.param('lat');
 				var alt = req.param('alt');
 				var ridePlains = msg.user.ridePlains;
-				
+
 				ridePlains.id(id).records.push({latitude:lat, longitude:lng, altitude:alt});
 
 				msg.user.save(function(err) {
@@ -112,11 +112,51 @@ module.exports = function (app) {
 			if(msg.error) {
 				res.send(msg);
 			} else {
-				var ridePlains = msg.user.ridePlains;
-				var plan = ridePlains.id(pid);
+
+				var plan = ridePlans.id(pid);
 				res.send({msg:'success', error:false, plan:plan});
 			}
 		});
 	});
+
+	app.get('/user/plan', function(req, res) {
+		var authKey = req.session.authKey;
+
+		if (authKey === '' || authKey === undefined) {
+			res.redirect('/');
+		} else {
+			keyAuth(authKey, function(msg) {
+				if(msg.error) {
+					res.redirect('/');
+				} else {
+					var ridePlans = msg.user.ridePlans;
+					res.render('plans/plans', {plans:ridePlans})
+				}
+			});
+		}
+	});
+
+	app.get('/user/plan/:pid', function(req, res) {
+    	var authKey = req.session.authKey;
+    	var pnum = req.param('pnum');
+
+		if (authKey === '' || authKey === undefined) {
+			res.redirect('/');
+		} else {
+			keyAuth(authKey, function(msg) {
+				if(msg.error) {
+					res.redirect('/');
+				} else {
+					var ridePlans = msg.user.ridePlans;
+					var plan = ridePlans.id(pid);
+					if(plan !== undefined) {
+						res.render('plan', {plan:plan});
+					} else {
+						res.redirect('/user/plans');
+					}
+				}
+			});
+		}
+    });
 
 };

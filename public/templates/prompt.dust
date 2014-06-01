@@ -1,0 +1,35 @@
+{> "layouts/master" /}
+
+
+
+{<navBar}
+<a class="active item" href='#main'>
+	<i class="home icon"></i>
+	TaiBike
+</a>
+<div class="right menu">
+	<a class="item" id='btnLogin' href='/login'>
+		<i class="user icon"></i>
+		登入
+	</a>
+</div>
+{/navBar}
+
+
+{<body}
+<div class="ui info message" >
+	<div class="header">
+		系統提示：
+	</div>
+	<p id='msg'></p>
+</div>
+{/body}
+
+
+{<js}
+<script type="text/javascript">
+	var msg = window.location.hash;
+	msg = msg.substr(1);
+	$('#msg').html(msg);
+</script>
+{/js}
