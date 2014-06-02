@@ -27,14 +27,14 @@
 {/navBar}
 
 {<body}
-<div class='ui segment' style='margin: 10px'>
+<div class='ui segment' style='margin: 10px' ng-app='MapApp' ng-controller='MapController'>
 	<div class="ui form segment" id='form'>
-		<input type='hidden' id='csrf' value='{_csrf}' />
+		<input type='hidden' ng-model='csrf' ng-init="csrf='{_csrf}'" />
 		<div class="ui error message">
 			<div class="header">錯誤</div>
 			<p lingdex="15" id='msg'>錯誤</p>
 		</div>
-		<div class="two fields" ng-app='MapApp' ng-controller='MapController'>
+		<div class="two fields">
 
 			<div class='field'>
 				<label>地圖</label>
@@ -44,7 +44,7 @@
 				<label>座標及時間（雙擊新增）</label>
 				<table class="ui table segment">
 				<thead>
-					<tr><th>名稱</th>
+					<tr><th>地點<p>(ex:出發地)</p></th>
 					<th>座標</th>
 					<th>時間</th>
 					<th>管理</th>
@@ -73,20 +73,24 @@
 
 		<div class="field">
 			<label>名稱</label>
-			<input placeholder="計畫名稱" type="text" id='name'>
+			<input placeholder="計畫名稱" type="text" ng-model='name'>
 		</div>
 		<div class="field">
 			<label>簡介</label>
-			<input placeholder="計畫簡介" type="text" id='discription'>
+			<input placeholder="計畫簡介" type="text" ng-model='description'>
 		</div>
 		<div class="field">
-			<label>日期與時間</label>
-			<input placeholder="計畫日期與時間" type="text" id='time'>
+			<label>開始時間</label>
+			<input placeholder="計畫日期與時間" type="datetime-local" ng-model='start_time' style="width: 280px;height: 30px;border-radius: 8px;">
+		</div>
+		<div class="field">
+			<label>結束時間</label>
+			<input placeholder="計畫日期與時間" type="datetime-local" ng-model='end_time' style="width: 280px;height: 30px;border-radius: 8px;">
 		</div>
 
 
 
-		<div class="ui green submit button" id='button-add'>新增計畫</div>
+		<div class="ui green submit button" id='button-add' ng-click='submitPlan()'>新增計畫</div>
 	</div>
 </div>
 {/body}

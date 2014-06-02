@@ -3,7 +3,9 @@
 var mongoose = require('mongoose');
 
 module.exports = mongoose.Schema({
-	latitude:Number, 
-	longitude:Number, 
-	altitude:Number
+	name:String,
+	latitude:Number,
+	longitude:Number,
+	altitude:Number,
+	time:Date
 });

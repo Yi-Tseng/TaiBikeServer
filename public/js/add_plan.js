@@ -4,7 +4,7 @@ MapApp.config(function($interpolateProvider) {
 	$interpolateProvider.endSymbol(']]');
 });
 
-MapApp.controller('MapController', function($scope) {
+MapApp.controller('MapController', function($scope, $http) {
 	$scope.items = [];
 
 	var mapOptions = {
@@ -24,7 +24,8 @@ MapApp.controller('MapController', function($scope) {
 		$scope.$apply(function() {
 			var lat = event.latLng.k;
 			var lng = event.latLng.A;
-			$scope.items.push({name:'', location:lat.toFixed(3) +"\n"+ lng.toFixed(3), date:'', marker:marker});
+			console.log(event);
+			$scope.items.push({name:'', location:lat.toFixed(3) +"\n"+ lng.toFixed(3), date:'', marker:marker, lat:lat, lng:lng});
 		});
 
 	});
@@ -41,6 +42,38 @@ MapApp.controller('MapController', function($scope) {
 			}
 		}
 
+	};
+
+	$scope.submitPlan = function() {
+
+		var tmp_items = [];
+		for(var i in $scope.items) {
+			var ii = $scope.items[i];
+			var n = ii.name;
+			var lat = ii.lat;
+			var lng = ii.lng;
+			var t = ii.date;
+			tmp_items.push({name:n, lat:lat, lng:lng, time:t});
+		}
+		for(var i in tmp_items) {
+			console.log(tmp_items[i]);
+		}
+
+		var post = $http.post('/user/add-plan', {
+			name:$scope.name,
+			description:$scope.description,
+			start_time:$scope.start_time,
+			end_time:$scope.end_time,
+			points:tmp_items,
+			_csrf:$scope.csrf
+		});
+		post.success(function(data, status, headers, config) {
+			console.log(data);
+
+		});
+		post.error(function(data, status) {
+
+		});
 	};
 });
 

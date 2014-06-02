@@ -1,37 +1,39 @@
 weathers {
-		location:String, 
-		time:Date, 
-		temperature:Number, 
-		weatherType:String, 
+		location:String,
+		time:Date,
+		temperature:Number,
+		weatherType:String,
 		humidity:Number
 }
 
 
 equpment {
-	name:String, 
+	name:String,
 	weight:Number
 }
 
 point {
-	latitude:Number, 
-	longitude:Number, 
-	altitude:Number
+	latitude:Number,
+	longitude:Number,
+	altitude:Number,
+	time:Date
 }
 
 ridePlain {
-	name:String, 
-	timeStart:Date, 
-	timeEnd:Date, 
-	points:[pointSchema], 
+	name:String,
+	description:String,
+	timeStart:Date,
+	timeEnd:Date,
+	points:[pointSchema],
 	records:[pointSchema]
 }
 
 users {
-	account:{type:String, unique:true}, 
-	password:String, 
-	name:String, 
-	equpments:[equpmentSchema], 
-	ridePlains:[ridePlainSchema], 
-	authKey:{type:String, unique:true}, 
+	account:{type:String, unique:true},
+	password:String,
+	name:String,
+	equpments:[equpmentSchema],
+	ridePlains:[ridePlainSchema],
+	authKey:{type:String, unique:true},
 	authKeyExpire:Date
 }

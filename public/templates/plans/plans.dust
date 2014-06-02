@@ -42,7 +42,14 @@
 				<td>{name}</td>
 				<td>{description}</td>
 				<td>
-				  <a class="ui button" href='#'><i class="text file icon"></i></a>
+					<div class="ui icon buttons">
+						<a class="ui button">
+							<i class="browser icon"></i>
+						</a>
+						<a class="ui button">
+							<i class="remove icon"></i>
+						</a>
+					</div>
 				</td>
 			</tr>
 			{/plans}
