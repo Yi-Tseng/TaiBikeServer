@@ -64,6 +64,29 @@ module.exports = function (app) {
 		}
 	});
 
+	app.get('/user/delete-plan', function(req, res) {
+		var authKey = req.session.authKey;
+		keyAuth(authKey, function(msg) {
+			if(msg.error) {
+				res.send(msg);
+			} else {
+				var id = req.param('id');
+				var ridePlans = msg.user.ridePlans;
+
+				User.update({authKey:authKey}, {$pull:{ridePlans:{_id:id}}}, function(err) {
+					if(err) {
+						res.send({msg:'db update err', error:true});
+					} else {
+						res.redirect('/user/plan');
+						// res.send({msg:'success', error:false});
+					}
+				});
+
+
+			}
+		});
+	});
+
 	app.get('/api/plan/add', function (req, res) {
 		var authKey = req.param('authKey');
 
@@ -88,6 +111,54 @@ module.exports = function (app) {
 
 			}
 		});
+	});
+
+	app.post('/user/update-plan', function(req, res) {
+		var authKey = req.session.authKey;
+		if (authKey === '' || authKey === undefined) {
+			res.redirect('/');
+		} else {
+			keyAuth(authKey, function(msg) {
+				if(msg.error) {
+					res.send(msg);
+				} else {
+					var ridePlans = msg.user.ridePlans;
+
+					var pid = req.param('pid');
+					var plan = ridePlans.id(pid);
+
+					var name = req.param('name');
+					var description = req.param('description');
+
+					// yyyy-MM-ddThh:mm
+					var timeStart = new Date(req.param('start_time'));
+					var timeEnd = new Date(req.param('end_time'));
+					var points = req.param('points');
+					var t_points = [];
+					for(var i in points) {
+						var p = points[i];
+						var np = {name:p.name, latitude:p.lat, longitude:p.lng, altitude:0, time:p.time};
+						t_points.push(np);
+					}
+
+					plan.name = name;
+					plan.description = description;
+					plan.timeStart = timeStart;
+					plan.timeEnd = timeEnd;
+					plan.points = t_points;
+
+
+					msg.user.save(function(err) {
+						if(err) {
+							res.send({msg:'db update err', error:true});
+						} else {
+							res.send({msg:'success', error:false});
+						}
+					});
+
+				}
+			});
+		}
 	});
 
 	app.get('/api/plan/update', function (req, res) {
@@ -143,9 +214,10 @@ module.exports = function (app) {
 				var lng = req.param('lng');
 				var lat = req.param('lat');
 				var alt = req.param('alt');
+				var time = new Date(req.param('time'));
 				var ridePlans = msg.user.ridePlans;
 
-				ridePlans.id(id).records.push({latitude:lat, longitude:lng, altitude:alt});
+				ridePlans.id(id).records.push({latitude:lat, longitude:lng, altitude:alt, time:time});
 
 				msg.user.save(function(err) {
 					if(err) {
@@ -172,8 +244,17 @@ module.exports = function (app) {
 	});
 
 	app.get('/api/plan/:pid', function (req, res) {
-		var authKey = req.param('authKey');
+		var authKey = '';
+		if(req.session.authKey === '' || req.session.authKey === undefined) {
+			authKey = req.param('authKey');
+		} else {
+			authKey = req.session.authKey;
+		}
+
 		var pid = req.param('pid');
+		console.log(authKey);
+		console.log(pid);
+
 		keyAuth(authKey, function(msg) {
 			if(msg.error) {
 				res.send(msg);
@@ -204,7 +285,7 @@ module.exports = function (app) {
 
 	app.get('/user/plan/:pid', function(req, res) {
     	var authKey = req.session.authKey;
-    	var pnum = req.param('pnum');
+    	var pid = req.param('pid');
 
 		if (authKey === '' || authKey === undefined) {
 			res.redirect('/');
@@ -216,7 +297,7 @@ module.exports = function (app) {
 					var ridePlans = msg.user.ridePlans;
 					var plan = ridePlans.id(pid);
 					if(plan !== undefined) {
-						res.render('plan', {plan:plan});
+						res.render('plans/plan', {plan:plan});
 					} else {
 						res.redirect('/user/plans');
 					}

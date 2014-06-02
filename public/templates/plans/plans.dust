@@ -43,10 +43,10 @@
 				<td>{description}</td>
 				<td>
 					<div class="ui icon buttons">
-						<a class="ui button">
+						<a class="ui button" href='/user/plan/{_id}'>
 							<i class="browser icon"></i>
 						</a>
-						<a class="ui button">
+						<a class="ui button" href='/user/delete-plan?id={_id}'>
 							<i class="remove icon"></i>
 						</a>
 					</div>
