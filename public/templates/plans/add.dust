@@ -98,7 +98,7 @@
 
 
 {<js}
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyAm_gwxQVaA7c5X-1JxDgoIYCcTemlJZAY"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <script type="text/javascript" src='/js/angular.min.js'></script>
 <script type="text/javascript" src='/js/add_plan.js'></script>
 {/js}
