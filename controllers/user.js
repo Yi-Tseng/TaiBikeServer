@@ -32,7 +32,7 @@ module.exports = function (app) {
 	    		} else if(users.length !== 0){
 	    			res.send({msg:'此帳號已被註冊', error:true});
 	    		} else {
-	    			var newUser = new User({account:account, password:md5(password)});
+	    			var newUser = new User({account:account, password:md5(password), name:name});
 	    			newUser.save(function(err2) {
 	    				if(err2) {
 	    					res.send({msg:err, error:true});
