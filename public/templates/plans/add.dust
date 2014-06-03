@@ -46,7 +46,7 @@
 					<th>時間</th>
 					<th>管理</th>
 				</tr></thead>
-				<tbody ng-repeat="i in items">
+				<tbody ng-repeat="i in items | orderBy:predicate">
 					<tr>
 						<td><input ng-model='i.name' /></td>
 						<td>[[i.location]]</td>

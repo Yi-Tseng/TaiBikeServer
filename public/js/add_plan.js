@@ -6,6 +6,7 @@ MapApp.config(function($interpolateProvider) {
 
 MapApp.controller('MapController', function($scope, $http) {
 	$scope.items = [];
+	$scope.predicate = 'date';
 
 	var mapOptions = {
 		zoom: 7,
