@@ -64,6 +64,7 @@ module.exports = function (app) {
 		} else {
 			keyAuth(authKey, function(msg) {
 				if(msg.error) {
+					req.session.authKey = '';
 					res.redirect('/');
 				} else {
 					res.render('user', {user:msg.user});
