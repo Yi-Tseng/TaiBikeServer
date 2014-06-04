@@ -5,15 +5,15 @@
 	<i class="home icon"></i>
 	TaiBike
 </a>
-<a class="active item scroll" href='/user'>
+<a class="active item" href='/user'>
 	<i class="user icon"></i>
 	我的資料
 </a>
-<a class="item scroll" href = '/user/plan'>
+<a class="item" href = '/user/plan'>
 	<i class="unordered list icon"></i>
 	騎乘計畫
 </a>
-<a class="item scroll" href = '#'>
+<a class="item" href = '#'>
 	<i class="globe icon"></i>
 	騎乘記錄
 </a>

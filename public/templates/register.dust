@@ -30,15 +30,15 @@
 		</div>
 		<div class="field">
 			<label>密碼</label>
-			<input placeholder="Username" type="password" id='password'>
+			<input placeholder="Password" type="password" id='password'>
 		</div>
 		<div class="field">
 			<label>在輸入一次密碼</label>
-			<input placeholder="Username" type="password" id='pwd2'>
+			<input placeholder="Password" type="password" id='pwd2'>
 		</div>
 		<div class="field">
 			<label>姓名</label>
-			<input placeholder="Username" type="text" id='name'>
+			<input placeholder="Name" type="text" id='name'>
 		</div>
 
 
