@@ -11,6 +11,10 @@ app.configure = function configure(nconf, next) {
 
 	db.config(nconf.get('databaseConfig'));
 
+	nconf.set('ssl', {
+        key:  fs.readFileSync('file:ssl/ssl.key'),
+        cert: fs.readFileSync('file:ssl/ssl.cert')
+    })
 	// Async method run on startup.
 	next(null);
 };
@@ -32,7 +36,7 @@ app.requestAfterRoute = function requestAfterRoute(server) {
 };
 
 if (require.main === module) {
-	kraken.create({key:'ssl/ssl.key', cert:'ssl/ssl.cert'}, app).listen(function (err, server) {
+	kraken.create(app).listen(function (err, server) {
 		if (err) {
 			console.error(err.stack);
 		}
