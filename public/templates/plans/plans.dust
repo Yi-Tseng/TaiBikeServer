@@ -14,6 +14,10 @@
 	<i class="unordered list icon"></i>
 	騎乘計畫
 </a>
+<a class="item" href = '/user/equpments'>
+	<i class="unordered shield icon"></i>
+	我的裝備
+</a>
 <a class="item scroll" href = '#'>
 	<i class="globe icon"></i>
 	騎乘記錄
@@ -44,10 +48,10 @@
 				<td>
 					<div class="ui icon buttons">
 						<a class="ui button" href='/user/plan/{_id}'>
-							<i class="browser icon"></i>
+							<i class="edit basic icon"></i>
 						</a>
 						<a class="ui button" href='/user/delete-plan?id={_id}'>
-							<i class="remove icon"></i>
+							<i class="delete basic icon"></i>
 						</a>
 					</div>
 				</td>

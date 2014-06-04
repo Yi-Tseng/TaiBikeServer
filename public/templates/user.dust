@@ -13,6 +13,10 @@
 	<i class="unordered list icon"></i>
 	騎乘計畫
 </a>
+<a class="item" href = '/user/equpments'>
+	<i class="unordered shield icon"></i>
+	我的裝備
+</a>
 <a class="item" href = '#'>
 	<i class="globe icon"></i>
 	騎乘記錄

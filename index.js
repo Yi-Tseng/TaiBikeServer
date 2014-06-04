@@ -3,7 +3,6 @@ var favicon = require('serve-favicon');
 
 var kraken = require('kraken-js'),
 	db = require('./lib/database'),
-	ssl = require('./config/ssl'),
 	fs = require('fs'),
 	app = {}
 	;
@@ -14,9 +13,9 @@ app.configure = function configure(nconf, next) {
 	db.config(nconf.get('databaseConfig'));
 
 	nconf.set('ssl', {
-		secrect: ssl.secret,
         key:  fs.readFileSync('./ssl/ssl.key'),
-        cert: fs.readFileSync('./ssl/ssl.crt')
+        cert: fs.readFileSync('./ssl/ssl.crt'),
+        ca: fs.readFileSync('./ssl/sub.class1.server.ca.pem')
     })
 	// Async method run on startup.
 	next(null);
