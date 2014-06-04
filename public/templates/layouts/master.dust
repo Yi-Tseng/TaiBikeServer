@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="/css/reset.css" />
 	<link rel="stylesheet" href="/css/app.css" />
 	<link rel="stylesheet" href="/css/semantic.min.css" />
-
+	<meta name="google-site-verification" content="GkgJO3Td1eoeMn_4uWLztD3rT2SGv0X84YZiIgATHWs" />
 </head>
 <body class="{+bodyClass/}">
 	<div class="ui inverted menu fixed" style="top: 0;">

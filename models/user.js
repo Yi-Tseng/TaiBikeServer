@@ -11,6 +11,7 @@ var userModel = function () {
 		account:{type:String, unique:true},
 		password:String,
 		name:String,
+		email:String,
 		equpments:[equpmentSchema],
 		ridePlans:[ridePlanSchema],
 		authKey:{type:String, unique:true},
