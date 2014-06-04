@@ -6,13 +6,14 @@ var check = function(something) {
 	return false;
 }
 
-$('#btnAdd').click(function(){
+$('#btnSave').click(function() {
 	var csrf = $('#csrf').val();
 	var name = $('#name').val();
 	var desc = $('#desc').val();
 	var weight = $('#weight').val();
 	var minTemp = $('#minTemp').val();
 	var maxTemp = $('#maxTemp').val();
+	var id = window.location.pathname.split('/')[3];
 
 	if(check(name)) {
 		$('.ui.form.segment').addClass('error');
@@ -29,8 +30,9 @@ $('#btnAdd').click(function(){
 	}
 
 
-	var equp = {_csrf:csrf, name:name, desc:desc, weight:weight, minTemp:minTemp, maxTemp:maxTemp};
-	$.post('/user/add-equpment', equp, function(data) {
+	var equp = {_csrf:csrf, id:id, name:name, desc:desc, weight:weight, minTemp:minTemp, maxTemp:maxTemp};
+	console.log(equp);
+	$.post('/user/update-equpment', equp, function(data) {
 		if(data.err){
 			$('.ui.form.segment').addClass('error');
 			$('#msg').html("發生錯誤！請檢查資料是否正確！");

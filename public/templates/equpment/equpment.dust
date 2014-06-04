@@ -1,0 +1,75 @@
+{> "layouts/master" /}
+
+{<navBar}
+<a class="active item" href='/'>
+	<i class="home icon"></i>
+	TaiBike
+</a>
+<a class="item" href='/user'>
+	<i class="user icon"></i>
+	我的資料
+</a>
+<a class="item" href = '/user/plan'>
+	<i class="unordered list icon"></i>
+	騎乘計畫
+</a>
+<a class="active item" href = '/user/equpments'>
+	<i class="unordered shield icon"></i>
+	我的裝備
+</a>
+<a class="item" href = '#'>
+	<i class="globe icon"></i>
+	騎乘記錄
+</a>
+<div class="right menu">
+	<a class="item" href='/logout'>
+		<i class="user icon"></i>
+		登出
+	</a>
+</div>
+{/navBar}
+
+{<body}
+<input id='csrf' type='hidden' value={_csrf}>
+<div class='ui segment' style='margin: 10px'>
+	<div class="ui form segment">
+		<div class="ui error message">
+			<div class="header">Oops！ 可能有錯！</div>
+			<p lingdex="15" id='msg'></p>
+		</div>
+
+		<div class="field">
+			<label>名稱</label>
+			<input type="text" placeholder='輕薄外套' id='name' value='{equpment.name}'>
+		</div>
+		<div class="field">
+			<label>說明</label>
+			<input type="text" placeholder='輕便薄外套，適合休閒時穿' id='desc' value='{equpment.description}'>
+		</div>
+		<div class="field">
+			<label>重量(公克)</label>
+			<input type="number" placeholder='500' id='weight' value='{equpment.weight}'>
+		</div>
+		<div class="two fields">
+
+			<div class="field">
+				<label>最低穿著溫度</label>
+				<input type="number" placeholder='25' id='minTemp' value='{equpment.minTemp}'>
+			</div>
+			<div class="field">
+				<label>最高穿著溫度</label>
+				<input type="number" placeholder='28' id='maxTemp' value='{equpment.maxTemp}'>
+			</div>
+		</div>
+
+		<div class="ui blue submit button" id='btnSave'>更新</div>
+	</div>
+</div>
+{/body}
+
+
+{<js}
+	<script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="/js/equp.js"></script>
+
+{/js}

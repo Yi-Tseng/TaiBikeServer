@@ -48,6 +48,62 @@ module.exports = function (app) {
 		}
     });
 
+
+    app.post('/user/update-equpment', function(req, res) {
+    	var authKey = req.session.authKey;
+		if (authKey === '' || authKey === undefined) {
+			res.redirect('/');
+		} else {
+			keyAuth(authKey, function(msg) {
+				if(msg.error) {
+					res.send(msg);
+				} else {
+					var id = req.param('id');
+					var name = req.param('name');
+					var desc = req.param('desc');
+					var weight = req.param('weight');
+					var minTemp = req.param('minTemp');
+					var maxTemp = req.param('maxTemp');
+
+					var equpments = msg.user.equpments;
+					var equpment = equpments.id(id);
+					equpment.name = name;
+					equpment.description = desc;
+					equpment.weight = weight;
+					equpment.minTemp = minTemp;
+					equpment.maxTemp = maxTemp;
+
+					msg.user.save(function(err) {
+						if(err) {
+							res.send({error:true, msg:err});
+						} else {
+							res.send({error:false, msg:'success'});
+						}
+					})
+				}
+			});
+		}
+    });
+
+    app.get('/user/equpment/:id', function(req, res){
+    	var authKey = req.session.authKey;
+		if (authKey === '' || authKey === undefined) {
+			res.redirect('/');
+		} else {
+			keyAuth(authKey, function(msg) {
+				if(msg.error) {
+					req.session.authKey = '';
+					res.redirect('/');
+				} else {
+					var id = req.param('id');
+					var equpments = msg.user.equpments;
+					var equpment = equpments.id(id);
+					res.render('equpment/equpment', {equpment:equpment});
+				}
+			});
+		}
+    });
+
     app.get('/user/equpments', function(req, res) {
     	var authKey = req.session.authKey;
 		if (authKey === '' || authKey === undefined) {
