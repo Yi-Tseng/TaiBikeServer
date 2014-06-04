@@ -3,7 +3,7 @@ var favicon = require('serve-favicon');
 
 var kraken = require('kraken-js'),
 	db = require('./lib/database'),
-	fs = require('fs');
+	fs = require('fs'),
 	app = {}
 	;
 
