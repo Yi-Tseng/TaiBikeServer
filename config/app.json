@@ -3,7 +3,8 @@
 	"databaseConfig": {
         "host": "localhost",
         "database": "TaiBike"
-    }
+    },
+    "port" : 443
 // "host": "localhost",
 //
 // "port": 8000,
