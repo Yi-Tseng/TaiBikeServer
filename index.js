@@ -14,7 +14,7 @@ app.configure = function configure(nconf, next) {
 
 	nconf.set('ssl', {
         key:  fs.readFileSync('./ssl/ssl.key'),
-        cert: fs.readFileSync('./ssl/ssl.cert')
+        cert: fs.readFileSync('./ssl/ssl.crt')
     })
 	// Async method run on startup.
 	next(null);
