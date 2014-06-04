@@ -32,7 +32,7 @@ app.requestAfterRoute = function requestAfterRoute(server) {
 };
 
 if (require.main === module) {
-	kraken.create(app).listen(function (err, server) {
+	kraken.create({key:'ssl/ssl.key', cert:'ssl/ssl.cert'}, app).listen(function (err, server) {
 		if (err) {
 			console.error(err.stack);
 		}
