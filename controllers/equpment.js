@@ -144,4 +144,28 @@ module.exports = function (app) {
 			});
 		}
     });
+
+
+    app.get('/api/user/equpments', function(req, res) {
+    	var authKey = req.param('authKey');
+    	if (authKey === '' || authKey === undefined) {
+			res.redirect('/');
+		} else {
+			keyAuth(authKey, function(msg) {
+				if(msg.error) {
+					res.send(msg);
+				} else {
+					User.find({authKey:authKey}, 'equpments', function(err, users) {
+						if(users.length === 1) {
+							var user = users[0];
+							res.send({msg:'success', equpments:user.equpments, error:false});
+						} else {
+							res.send({msg:'Auth Key Error!', error:true});
+						}
+					});
+				});
+				}
+			});
+		}
+    });
 }

@@ -8,5 +8,6 @@ module.exports = mongoose.Schema({
 	minTemp:Number,
 	maxTemp:Number,
 	description:String,
-	weight:Number
+	weight:Number,
+	weather:Array
 });
