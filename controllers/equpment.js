@@ -87,16 +87,36 @@ module.exports = function (app) {
 					var name = req.param('name');
 					var desc = req.param('desc');
 					var weight = req.param('weight');
-					var minTemp = req.param('minTemp');
-					var maxTemp = req.param('maxTemp');
+					// weather
+					var sunny = req.param('sunny');
+					var rainy = req.param('rainy');
+					var cold = req.param('cold');
+					var hot = req.param('hot');
+					var mountain = req.param('mountain');
+
+					var weather = [];
+					if(sunny === 'true') {
+						weather.push(0);
+					}
+					if(rainy === 'true') {
+						weather.push(1);
+					}
+					if(cold === 'true') {
+						weather.push(2);
+					}
+					if(hot === 'true') {
+						weather.push(3);
+					}
+					if(mountain === 'true') {
+						weather.push(4);
+					}
 
 					var equpments = msg.user.equpments;
 					var equpment = equpments.id(id);
 					equpment.name = name;
 					equpment.description = desc;
 					equpment.weight = weight;
-					equpment.minTemp = minTemp;
-					equpment.maxTemp = maxTemp;
+					equpment.weather = weather;
 
 					msg.user.save(function(err) {
 						if(err) {

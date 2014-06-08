@@ -1,4 +1,11 @@
 
+// init check box
+$('#sunny').checkbox();
+$('#rainy').checkbox();
+$('#cold').checkbox();
+$('#hot').checkbox();
+$('#mountain').checkbox();
+
 var check = function(something) {
 	if(something === '' || something === undefined) {
 		return true;
