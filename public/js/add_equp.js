@@ -1,4 +1,13 @@
 
+
+// init check box
+$('#sunny').checkbox();
+$('#rainy').checkbox();
+$('#cold').checkbox();
+$('#hot').checkbox();
+$('#mountain').checkbox();
+
+
 var check = function(something) {
 	if(something === '' || something === undefined) {
 		return true;
@@ -11,8 +20,12 @@ $('#btnAdd').click(function(){
 	var name = $('#name').val();
 	var desc = $('#desc').val();
 	var weight = $('#weight').val();
-	var minTemp = $('#minTemp').val();
-	var maxTemp = $('#maxTemp').val();
+	var sunny = $('#sunny input').filter(":checked").length > 0;
+	var rainy = $('#rainy input').filter(":checked").length > 0;
+	var cold = $('#cold input').filter(":checked").length > 0;
+	var hot = $('#hot input').filter(":checked").length > 0;
+	var mountain = $('#mountain input').filter(":checked").length > 0;
+
 
 	if(check(name)) {
 		$('.ui.form.segment').addClass('error');
@@ -22,14 +35,12 @@ $('#btnAdd').click(function(){
 		$('.ui.form.segment').addClass('error');
 		$('#msg').html('請輸入重量');
 		return;
-	} else if(check(minTemp)) {
-		minTemp = -100;
-	} else if(check(maxTemp)) {
-		maxTemp = 100;
-	}
+	} 
 
 
-	var equp = {_csrf:csrf, name:name, desc:desc, weight:weight, minTemp:minTemp, maxTemp:maxTemp};
+	var equp = {_csrf:csrf, name:name, desc:desc, weight:weight, sunny:sunny, rainy:rainy, cold:cold, hot:hot, mountain:mountain};
+	console.log(equp);
+	
 	$.post('/user/add-equpment', equp, function(data) {
 		if(data.err){
 			$('.ui.form.segment').addClass('error');

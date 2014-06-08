@@ -50,17 +50,42 @@
 			<label>重量(公克)</label>
 			<input type="number" placeholder='500' id='weight'>
 		</div>
-		<div class="two fields">
 
-			<div class="field">
-				<label>最低穿著溫度</label>
-				<input type="number" placeholder='25' id='minTemp'>
-			</div>
-			<div class="field">
-				<label>最高穿著溫度</label>
-				<input type="number" placeholder='28' id='maxTemp'>
+		<div class="field">
+			<label style='margin-bottom: 10px'>適合天氣</label>
+		</div>
+		<div class="field">
+			<div class="ui toggle checkbox" id="sunny">
+				<input type="checkbox">
+				<label>舒適，晴天</label>
 			</div>
 		</div>
+		<div class="field">
+			<div class="ui toggle checkbox" id="rainy">
+				<input type="checkbox">
+				<label>雨天</label>
+			</div>
+		</div>
+		<div class="field">
+			<div class="ui toggle checkbox" id="cold">
+				<input type="checkbox">
+				<label>寒冷</label>
+			</div>
+		</div>
+		<div class="field">
+			<div class="ui toggle checkbox" id="hot">
+				<input type="checkbox">
+				<label>炎熱</label>
+			</div>
+		</div>
+		<div class="field">
+			<div class="ui toggle checkbox" id="mountain">
+				<input type="checkbox">
+				<label>高山</label>
+			</div>
+		</div>
+	</div>
+		
 
 		<div class="ui blue submit button" id='btnAdd'>新增</div>
 	</div>
@@ -70,6 +95,7 @@
 
 {<js}
 	<script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="/js/semantic.min.js"></script>
 	<script type="text/javascript" src="/js/add_equp.js"></script>
 
 {/js}
