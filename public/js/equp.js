@@ -38,12 +38,12 @@ $('#btnSave').click(function() {
 
 	var equp = {_csrf:csrf, id:id, name:name, desc:desc, weight:weight, sunny:sunny, rainy:rainy, cold:cold, hot:hot, mountain:mountain};
 	console.log(equp);
-	$.post('/user/update-equpment', equp, function(data) {
+	$.post('/user/update-equipment', equp, function(data) {
 		if(data.err){
 			$('.ui.form.segment').addClass('error');
 			$('#msg').html("發生錯誤！請檢查資料是否正確！");
 		} else {
-			window.location = '/user/equpments';
+			window.location = '/user/equipments';
 		}
 	}, 'json');
 });

@@ -1,7 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose');
-var equpmentSchema = require('./equpment');
+var equipmentSchema = require('./equipment');
 var ridePlanSchema = require('./plan');
 
 
@@ -12,7 +12,7 @@ var userModel = function () {
 		password:String,
 		name:String,
 		email:String,
-		equpments:[equpmentSchema],
+		equipments:[equipmentSchema],
 		ridePlans:[ridePlanSchema],
 		authKey:{type:String, unique:true},
 		authKeyExpire:Date

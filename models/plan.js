@@ -2,7 +2,7 @@
 
 var mongoose = require('mongoose');
 var pointSchema = require('./point');
-var equpmentSchema = require('./equpment');
+var equipmentSchema = require('./equipment');
 
 module.exports = mongoose.Schema({
 	name:String,
@@ -11,5 +11,5 @@ module.exports = mongoose.Schema({
 	timeEnd:Date,
 	points:[pointSchema],
 	records:[pointSchema], 
-	equpments:[equpmentSchema]
+	equipments:[equipmentSchema]
 });

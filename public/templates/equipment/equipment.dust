@@ -1,0 +1,118 @@
+{> "layouts/master" /}
+
+{<navBar}
+<a class="active item" href='/'>
+	<i class="home icon"></i>
+	TaiBike
+</a>
+<a class="item" href='/user'>
+	<i class="user icon"></i>
+	我的資料
+</a>
+<a class="item" href = '/user/plan'>
+	<i class="unordered list icon"></i>
+	騎乘計畫
+</a>
+<a class="active item" href = '/user/equipments'>
+	<i class="unordered shield icon"></i>
+	我的裝備
+</a>
+<a class="item" href = '#'>
+	<i class="globe icon"></i>
+	騎乘記錄
+</a>
+<div class="right menu">
+	<a class="item" href='/logout'>
+		<i class="user icon"></i>
+		登出
+	</a>
+</div>
+{/navBar}
+
+{<body}
+<input id='csrf' type='hidden' value={_csrf}>
+<div class='ui segment' style='margin: 10px'>
+	<div class="ui form segment">
+		<div class="ui error message">
+			<div class="header">Oops！ 可能有錯！</div>
+			<p lingdex="15" id='msg'></p>
+		</div>
+
+		<div class="field">
+			<label>名稱</label>
+			<input type="text" placeholder='輕薄外套' id='name' value='{equipment.name}'>
+		</div>
+		<div class="field">
+			<label>說明</label>
+			<input type="text" placeholder='輕便薄外套，適合休閒時穿' id='desc' value='{equipment.description}'>
+		</div>
+		<div class="field">
+			<label>重量(公克)</label>
+			<input type="number" placeholder='500' id='weight' value='{equipment.weight}'>
+		</div>
+		<div class="field">
+			<label style='margin-bottom: 10px'>適合天氣</label>
+		</div>
+		<div class="field">
+			<div class="ui toggle checkbox" id="sunny">
+				<input type="checkbox">
+				<label>舒適，晴天</label>
+			</div>
+		</div>
+		<div class="field">
+			<div class="ui toggle checkbox" id="rainy">
+				<input type="checkbox">
+				<label>雨天</label>
+			</div>
+		</div>
+		<div class="field">
+			<div class="ui toggle checkbox" id="cold">
+				<input type="checkbox">
+				<label>寒冷</label>
+			</div>
+		</div>
+		<div class="field">
+			<div class="ui toggle checkbox" id="hot">
+				<input type="checkbox">
+				<label>炎熱</label>
+			</div>
+		</div>
+		<div class="field">
+			<div class="ui toggle checkbox" id="mountain">
+				<input type="checkbox">
+				<label>高山</label>
+			</div>
+		</div>
+
+		<div class="ui blue submit button" id='btnSave'>更新</div>
+	</div>
+</div>
+{/body}
+
+
+{<js}
+	<script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="/js/semantic.min.js"></script>
+	<script type="text/javascript" src="/js/equp.js"></script>
+	<script type="text/javascript">
+
+		var arr = [{equipment.weather}];
+		for(var i = 0; i < arr.length; i++) {
+			if(arr[i] === 0) {
+				$('#sunny').checkbox('enable');
+			}
+			if(arr[i] === 1) {
+				$('#rainy').checkbox('enable');
+			}
+			if(arr[i] === 2) {
+				$('#cold').checkbox('enable');
+			}
+			if(arr[i] === 3) {
+				$('#hot').checkbox('enable');
+			}
+			if(arr[i] === 4) {
+				$('#mountain').checkbox('enable');
+			}			
+		}
+	</script>
+{/js}

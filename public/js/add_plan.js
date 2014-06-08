@@ -81,9 +81,6 @@ MapApp.controller('MapController', function($scope, $http) {
 			return;
 		}
 
-
-
-
 		var post = $http.post('/user/add-plan', {
 			name:$scope.name,
 			description:$scope.description,
