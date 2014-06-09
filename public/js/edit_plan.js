@@ -96,6 +96,14 @@ MapApp.controller('MapController', function($scope, $http) {
 			return;
 		}
 		var pid = window.location.pathname.split('/')[3];
+		var equipments = [];
+
+		for(var i in $scope.equipments) {
+			var e = $scope.equipments[i];
+			if(e.selected) {
+				equipments.push(e);
+			}
+		}
 		var post = $http.post('/user/update-plan', {
 			pid:pid,
 			name:$scope.name,
@@ -103,8 +111,11 @@ MapApp.controller('MapController', function($scope, $http) {
 			start_time:$scope.start_time,
 			end_time:$scope.end_time,
 			points:tmp_items,
+			equipments:equipments, 
 			_csrf:$scope.csrf
 		});
+
+
 
 		post.success(function(data, status, headers, config) {
 			console.log(data);
@@ -122,8 +133,12 @@ MapApp.controller('MapController', function($scope, $http) {
 
 	};
 
-	// init
+	$scope.getwStr = function(n) {
+		var weatherStr = ['晴天，舒適', '雨天', '寒冷', '炎熱', '高山'];
+		return weatherStr[n];
+	}
 
+	// init
 	var pid = window.location.pathname.split('/')[3];
 	var planReq = $http.get('/api/plan/' + pid);
 	planReq.success(function(data, status, headers, config) {
@@ -133,6 +148,38 @@ MapApp.controller('MapController', function($scope, $http) {
 		} else {
 			var plan = data.plan;
 			var points = plan.points;
+
+			var contains = function(obj, array) {
+				for(var i in array) {
+					var o = array[i];
+					if(o._id === obj._id) {
+						return true;
+					}
+				}
+				return false;
+			}
+
+			var equipGet = $http.get('/api/user/equipments');
+			equipGet.success(function(data, status, headers, config) {
+				console.log(data);
+				if(!data.error) {
+					$scope.equipments = data.equipments;
+					var pe = plan.equipments;
+
+					for(var i in $scope.equipments) {
+						var e = $scope.equipments[i];
+
+						if(contains(e, pe)) {
+							e.selected = true;
+						} else {
+							e.selected = false;
+						}
+
+						
+					}
+				}
+			});
+
 
 			for(var i in points) {
 				var p = points[i];

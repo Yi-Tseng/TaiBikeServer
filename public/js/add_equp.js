@@ -1,11 +1,7 @@
 
 
 // init check box
-$('#sunny').checkbox();
-$('#rainy').checkbox();
-$('#cold').checkbox();
-$('#hot').checkbox();
-$('#mountain').checkbox();
+$('.checkbox').checkbox();
 
 
 var check = function(something) {

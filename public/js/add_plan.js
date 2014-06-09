@@ -7,13 +7,14 @@ MapApp.config(function($interpolateProvider) {
 MapApp.controller('MapController', function($scope, $http) {
 	$scope.items = [];
 	$scope.predicate = 'date';
+	$scope.step = 1;
 
 	var mapOptions = {
 		zoom: 7,
 		center: new google.maps.LatLng(23.5989354, 121.0173534),
 	    disableDoubleClickZoom: true
 	};
-	map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+	map = new google.maps.Map($('#map-canvas')[0], mapOptions);
 
 	google.maps.event.addListener(map, 'dblclick', function(event) {
 
@@ -31,6 +32,19 @@ MapApp.controller('MapController', function($scope, $http) {
 
 	});
 
+	var equipGet = $http.get('/api/user/equipments');
+	equipGet.success(function(data, status, headers, config) {
+		console.log(data);
+		if(!data.error) {
+			$scope.equipments = data.equipments;
+			for(var i=0; i<$scope.equipments.length; i++) {
+				var e = $scope.equipments[i];
+				e.selected = false;
+			}
+			console.log($scope.equipments);
+		}
+	});
+
 	$scope.locate = function(item) {
 		map.setCenter(item.marker.getPosition());
 	};
@@ -44,6 +58,45 @@ MapApp.controller('MapController', function($scope, $http) {
 		}
 
 	};
+
+	$scope.nextStep = function() {
+		if($scope.step === 3) {
+			window.setTimeout(function(){google.maps.event.trigger(map, 'resize');},500);
+		}
+		if($scope.step < 4) {
+			$scope.step++;
+		}
+	}
+
+	$scope.prevStep = function() {
+		if($scope.step === 3) {
+			window.setTimeout(function(){google.maps.event.trigger(map, 'resize');},500);
+		}
+		if($scope.step > 1) {
+			$scope.step--;
+		}
+	}
+
+	$scope.setStep = function(step){
+		if($scope.step === 3) {
+			window.setTimeout(function(){google.maps.event.trigger(map, 'resize');},500);
+		}
+		$scope.step = step;
+	}
+
+	$scope.getwStr = function(n) {
+		var weatherStr = ['晴天，舒適', '雨天', '寒冷', '炎熱', '高山'];
+		return weatherStr[n];
+	}
+
+	$scope.test = function() {
+		// console.log($scope.equipments);
+		for(var i =0; i< $scope.equipments.length; i++){
+			var e = $scope.equipments[i];
+			console.log(e.selected);
+			// console.log('a');
+		}
+	}
 
 	$scope.submitPlan = function() {
 
@@ -81,12 +134,21 @@ MapApp.controller('MapController', function($scope, $http) {
 			return;
 		}
 
+		var equipments = [];
+		for(var i =0; i< $scope.equipments.length; i++){
+			var e = $scope.equipments[i];
+			if(e.selected) {
+				equipments.push(e);
+			}
+		}
+
 		var post = $http.post('/user/add-plan', {
 			name:$scope.name,
 			description:$scope.description,
 			start_time:$scope.start_time,
 			end_time:$scope.end_time,
 			points:tmp_items,
+			equipments:equipments, 
 			_csrf:$scope.csrf
 		});
 

@@ -36,6 +36,53 @@
 		<input type='hidden' ng-model='csrf' ng-init="csrf='{_csrf}'" />
 		<input type='hidden' ng-model='pid' ng-init="pid='{plan._id}'" />
 
+
+		<div class="field">
+			<label>名稱</label>
+			<input placeholder="計畫名稱" type="text" ng-model='name' ng-init="name='{plan.name}'">
+		</div>
+		<div class="field">
+			<label>簡介</label>
+			<input placeholder="計畫簡介" type="text" ng-model='description' ng-init="description='{plan.description}'">
+		</div>
+		<div class="field">
+			<label>開始時間</label>
+			<input placeholder="計畫日期與時間" type="datetime-local" ng-model='start_time' style="width: 200px;height: 40px;border: 1px solid rgba(0,0,0,.15);border-radius: .3125em;">
+		</div>
+		<div class="field">
+			<label>結束時間</label>
+			<input placeholder="計畫日期與時間" type="datetime-local" ng-model='end_time' style="width: 200px;height: 40px;border: 1px solid rgba(0,0,0,.15);border-radius: .3125em;">
+		</div>
+
+		<div class='field'>
+			<table class="ui table segment">
+				<thead>
+					<tr>
+						<th>名稱</th>
+						<th>說明</th>
+						<th>重量</th>
+						<th>適應天氣</th>
+						<th>選取</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat='e in equipments'>
+						<td>[[e.name]]</td>
+						<td>[[e.description]]</td>
+						<td>[[e.weight]]</td>
+						<td>
+							<p ng-repeat='w in e.weather'>[[getwStr(w)]]</p>
+						</td>
+						<td>
+							<div class="field">
+								<input type='checkbox' ng-model='e.selected' ></input>
+							</div>
+						</td>
+					</tr>
+ 				 </tbody>
+			</table>
+		</div>
+
 		<div class="two fields">
 
 			<div class='field'>
@@ -73,22 +120,7 @@
 			</div>
 		</div>
 
-		<div class="field">
-			<label>名稱</label>
-			<input placeholder="計畫名稱" type="text" ng-model='name' ng-init="name='{plan.name}'">
-		</div>
-		<div class="field">
-			<label>簡介</label>
-			<input placeholder="計畫簡介" type="text" ng-model='description' ng-init="description='{plan.description}'">
-		</div>
-		<div class="field">
-			<label>開始時間</label>
-			<input placeholder="計畫日期與時間" type="datetime-local" ng-model='start_time' style="width: 200px;height: 40px;border: 1px solid rgba(0,0,0,.15);border-radius: .3125em;">
-		</div>
-		<div class="field">
-			<label>結束時間</label>
-			<input placeholder="計畫日期與時間" type="datetime-local" ng-model='end_time' style="width: 200px;height: 40px;border: 1px solid rgba(0,0,0,.15);border-radius: .3125em;">
-		</div>
+		
 
 
 

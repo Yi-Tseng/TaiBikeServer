@@ -192,9 +192,13 @@ module.exports = function (app) {
 
 
     app.get('/api/user/equipments', function(req, res) {
-    	var authKey = req.param('authKey');
+		var authKey = req.session.authKey;
+		if (authKey === '' || authKey === undefined) {
+			authKey = req.param('authKey');	
+		}
+
     	if (authKey === '' || authKey === undefined) {
-			res.redirect('/');
+			res.send({error:true, msg:'authKey can\'t be null'});
 		} else {
 			keyAuth(authKey, function(msg) {
 				if(msg.error) {

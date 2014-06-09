@@ -42,14 +42,16 @@ module.exports = function (app) {
 					var timeStart = new Date(req.param('start_time'));
 					var timeEnd = new Date(req.param('end_time'));
 					var points = req.param('points');
+					var equipments = req.param('equipments');
 					var t_points = [];
+
 					for(var i in points) {
 						var p = points[i];
 						var np = {name:p.name, latitude:p.lat, longitude:p.lng, altitude:0, time:p.time};
 						t_points.push(np);
 					}
 
-					var plan = {name:name, description:description, timeStart:timeStart, timeEnd:timeEnd, points:t_points};
+					var plan = {name:name, description:description, timeStart:timeStart, timeEnd:timeEnd, points:t_points, equipments:equipments};
 
 					User.update({authKey:authKey}, {$push:{ridePlans:plan}}, function(err) {
 						if(err) {
@@ -129,6 +131,7 @@ module.exports = function (app) {
 
 					var name = req.param('name');
 					var description = req.param('description');
+					var equipments = req.param('equipments');
 
 					// yyyy-MM-ddThh:mm
 					var timeStart = new Date(req.param('start_time'));
@@ -146,6 +149,7 @@ module.exports = function (app) {
 					plan.timeStart = timeStart;
 					plan.timeEnd = timeEnd;
 					plan.points = t_points;
+					plan.equipments = equipments;
 
 
 					msg.user.save(function(err) {

@@ -34,64 +34,185 @@
 <div class='ui segment' style='margin: 10px' ng-app='MapApp' ng-controller='MapController'>
 	<div class="ui form segment [[errorClass]]" id='form'>
 		<input type='hidden' ng-model='csrf' ng-init="csrf='{_csrf}'" />
-
-		<div class="two fields">
-
-			<div class='field'>
-				<label>地圖</label>
-				<div id="map-canvas"></div>
+		<div class='two fields'>
+		<div class="field">
+			<div class="ui small steps">
+				<div class="ui [[step == 1? 'active':'' ]] step" ng-click='setStep(1)'>
+					名稱以及簡介
+				</div>
+				<div class="ui [[step == 2? 'active':'' ]] step" ng-click='setStep(2)'>
+					裝備
+				</div>
+				<div class="ui [[step == 3? 'active':'' ]] step" ng-click='setStep(3)'>
+					地標
+				</div>
+				<div class="ui [[step == 4? 'active':'' ]] step" ng-click='setStep(4)'>
+					確認
+				</div>
 			</div>
-			<div class='field'>
-				<label>座標及時間（雙擊地圖新增）</label>
-				<table class="ui table segment">
-				<thead>
-					<tr><th>地點<p>(ex:出發地)</p></th>
-					<th>座標</th>
-					<th>時間</th>
-					<th>管理</th>
-				</tr></thead>
-				<tbody ng-repeat="i in items | orderBy:predicate">
-					<tr>
-						<td><input ng-model='i.name' /></td>
-						<td>[[i.location]]</td>
-						<td><input type='datetime-local' ng-model='i.date' /></td>
-						<td>
-							<div class="ui icon buttons">
-								<div class="ui button" ng-click='locate(i)'>
-									<i class="location icon"></i>
-								</div>
+		</div>
+		<div class='field'>
+			<div class="ui buttons">
+				<div class="ui [[step==1?'disabled':'']] button" ng-click='prevStep()'>上一步</div>
+				<div class="or"></div>
+				<div class="ui [[step==4?'disabled':'']] button" ng-click='nextStep()'>下一步</div>
+			</div>
+		</div>
+		</div>
 
-								<div class="ui button" ng-click='del(i)'>
-									<i class="remove icon"></i>
-								</div>
+		<div id='step-one' ng-show='step === 1'>
+			<div class="field">
+				<label>名稱</label>
+				<input placeholder="計畫名稱" type="text" ng-model='name'>
+			</div>
+			<div class="field">
+				<label>簡介</label>
+				<input placeholder="計畫簡介" type="text" ng-model='description'>
+			</div>
+			<div class="field">
+				<label>開始時間</label>
+				<input placeholder="計畫日期與時間" type="datetime-local" ng-model='start_time' style="width: 280px;height: 30px;border-radius: 8px;">
+			</div>
+			<div class="field">
+				<label>結束時間</label>
+				<input placeholder="計畫日期與時間" type="datetime-local" ng-model='end_time' style="width: 280px;height: 30px;border-radius: 8px;">
+			</div>
+		</div>
+
+
+
+		<div id='step-two' ng-show='step == 2'>
+			<table class="ui table segment">
+				<thead>
+					<tr>
+						<th>名稱</th>
+						<th>說明</th>
+						<th>重量</th>
+						<th>適應天氣</th>
+						<th>選取</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat='e in equipments'>
+						<td>[[e.name]]</td>
+						<td>[[e.description]]</td>
+						<td>[[e.weight]]</td>
+						<td>
+							<p ng-repeat='w in e.weather'>[[getwStr(w)]]</p>
+						</td>
+						<td>
+							<div class="field">
+								<input type='checkbox' ng-model='e.selected'></input>
 							</div>
 						</td>
 					</tr>
-				</tbody>
+ 				 </tbody>
 			</table>
+			
+		</div>
+
+
+
+		<div id='step-three' ng-show='step == 3'>
+			<div class="two fields">
+
+				<div class='field'>
+					<label>地圖</label>
+					<div id="map-canvas"></div>
+				</div>
+				<div class='field'>
+					<label>座標及時間（雙擊地圖新增）</label>
+					<table class="ui table segment">
+						<thead>
+							<tr><th>地點<p>(ex:出發地)</p></th>
+							<th>座標</th>
+							<th>時間</th>
+							<th>管理</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="i in items | orderBy:predicate">
+								<td><input ng-model='i.name' /></td>
+								<td>[[i.location]]</td>
+								<td><input type='datetime-local' ng-model='i.date' /></td>
+								<td>
+									<div class="ui icon buttons">
+										<div class="ui button" ng-click='locate(i)'>
+											<i class="location icon"></i>
+										</div>
+
+										<div class="ui button" ng-click='del(i)'>
+											<i class="remove icon"></i>
+										</div>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 
-		<div class="field">
-			<label>名稱</label>
-			<input placeholder="計畫名稱" type="text" ng-model='name'>
-		</div>
-		<div class="field">
-			<label>簡介</label>
-			<input placeholder="計畫簡介" type="text" ng-model='description'>
-		</div>
-		<div class="field">
-			<label>開始時間</label>
-			<input placeholder="計畫日期與時間" type="datetime-local" ng-model='start_time' style="width: 280px;height: 30px;border-radius: 8px;">
-		</div>
-		<div class="field">
-			<label>結束時間</label>
-			<input placeholder="計畫日期與時間" type="datetime-local" ng-model='end_time' style="width: 280px;height: 30px;border-radius: 8px;">
-		</div>
 
 
+		
+		<div id='step-four' ng-show='step == 4'>
+			<div class="field">
+				<h3>名稱：[[name]]</h3>
+			</div>
+			<div class="field">
+				<h3>簡介：[[description]]</h3>
+			</div>
+			<div class="field">
+				<h3>開始時間：[[start_time]]</h3>
+			</div>
+			<div class="field">
+				<h3>結束時間：[[end_time]]</h3>
+			</div>
+			<div class='field'>
+				<h3>座標及時間</h3>
+				<table class="ui table segment">
+					<thead>
+						<tr><th>地點</th>
+						<th>座標</th>
+						<th>時間</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="i in items | orderBy:predicate">
+							<td>[[i.name]]</td>
+							<td>[[i.location]]</td>
+							<td>[[i.date]]</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class='field'>
+				<h3>裝備</h3>
+				<table class="ui table segment">
+					<thead>
+						<tr>
+							<th>名稱</th>
+							<th>說明</th>
+							<th>重量</th>
+							<th>適應天氣</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat='e in equipments' ng-show='e.selected'>
+							<td>[[e.name]]</td>
+							<td>[[e.description]]</td>
+							<td>[[e.weight]]</td>
+							<td>
+								<p ng-repeat='w in e.weather'>[[getwStr(w)]]</p>
+							</td>
+						</tr>
+	 				 </tbody>
+				</table>
+			</div>
 
-		<div class="ui green submit button" id='button-add' ng-click='submitPlan()'>新增計畫</div>
+			<div class="ui green submit button" id='button-add' ng-click='submitPlan()'>新增計畫</div>
+		</div>
 		<div class="ui error message">
 			<div class="header">錯誤</div>
 			<p lingdex="15" id='msg'>[[errorMsg]]</p>
@@ -103,7 +224,14 @@
 
 
 {<js}
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-<script type="text/javascript" src='/js/angular.min.js'></script>
-<script type="text/javascript" src='/js/add_plan.js'></script>
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+	<script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src='/js/angular.min.js'></script>
+	<script type="text/javascript" src="/js/semantic.min.js"></script>
+	<script type="text/javascript" src='/js/add_plan.js'></script>
+	<script type="text/javascript">
+		setTimeout(function() {
+			$('.ui.toggle.checkbox').checkbox();
+		}, 100);
+	</script>
 {/js}
