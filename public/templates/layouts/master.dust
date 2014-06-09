@@ -16,7 +16,7 @@
 	</div>
 	{+body /}
 
-	<footer>Copyright, YiTingLu, YiTseng</footer>
+	<footer>Copyright, Eddie Chen, YiTing Lu, Yi Tseng</footer>
 
 	{+js /}
 

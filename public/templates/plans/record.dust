@@ -1,0 +1,95 @@
+{> "layouts/master" /}
+
+
+{<navBar}
+<a class="active item" href='/'>
+	<i class="home icon"></i>
+	TaiBike
+</a>
+<a class="item scroll" href='/user'>
+	<i class="user icon"></i>
+	我的資料
+</a>
+<a class="item scroll" href = '/user/plan'>
+	<i class="unordered list icon"></i>
+	騎乘計畫
+</a>
+<a class="item" href = '/user/equipments'>
+	<i class="unordered shield icon"></i>
+	我的裝備
+</a>
+<a class="active item scroll" href = '/user/plan/records'>
+	<i class="globe icon"></i>
+	騎乘記錄
+</a>
+<div class="right menu">
+	<a class="item" href='/logout'>
+		<i class="user icon"></i>
+		登出
+	</a>
+</div>
+{/navBar}
+
+{<body}
+<div class='ui segment' style='margin: 10px' ng-app='MapApp' ng-controller='MapController'>
+	<div class="ui form segment [[errorClass]]" id='form'>
+		<input type='hidden' ng-model='csrf' ng-init="csrf='{_csrf}'" />
+		
+		<div id='step-four' ng-show='step == 4'>
+			<div class="field">
+				<h3>名稱：{plan.name}</h3>
+			</div>
+			<div class="field">
+				<h3>簡介：{plan.description}</h3>
+			</div>
+			<div class="field">
+				<h3>開始時間：{plan.timeStart}</h3>
+			</div>
+			<div class="field">
+				<h3>結束時間：{plan.timeEnd}</h3>
+			</div>
+			<div class='field'>
+					<h3>座標及時間</h3>
+			</div>
+			<div class='two fields'>
+				<div class='field'>
+					<div id='map-canvas'></div>
+				</div>
+				<div class='field'>
+					<table class="ui table segment">
+						<thead>
+							<tr>
+								<th>經度</th>
+								<th>緯度</th>
+								<th>高度</th>
+								<th>時間</th>
+							</tr>
+						</thead>
+						<tbody>
+							{#records}
+							<tr>
+								<td>{longitude}</td>
+								<td>{latitude}</td>
+								<td>{altitude}</td>
+								<td>{time}</td>
+							</tr>
+							{/records}
+						</tbody>
+					</table>
+				</div>
+				
+			</div>
+
+		</div>
+	</div>
+</div>
+{/body}
+
+
+
+{<js}
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+	<script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="/js/semantic.min.js"></script>
+	<script type="text/javascript" src='/js/record.js'></script>
+{/js}

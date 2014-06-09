@@ -18,7 +18,7 @@
 	<i class="unordered shield icon"></i>
 	我的裝備
 </a>
-<a class="item scroll" href = '#'>
+<a class="item scroll" href = '/user/plan/records'>
 	<i class="globe icon"></i>
 	騎乘記錄
 </a>

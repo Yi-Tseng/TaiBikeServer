@@ -247,6 +247,56 @@ module.exports = function (app) {
 		});
 	});
 
+	app.get('/user/plan/records', function(req, res) {
+    	var authKey = req.session.authKey;
+		if (authKey === '' || authKey === undefined) {
+			res.redirect('/');
+		} else {
+			keyAuth(authKey, function(msg) {
+				if(msg.error) {
+					res.redirect('/');
+				} else {
+					var ridePlans = msg.user.ridePlans;
+					res.render('plans/records', {ridePlans:ridePlans});
+				}
+			});
+		}
+    });
+
+    app.get('/user/plan/record/:pid', function(req, res) {
+    	var authKey = req.session.authKey;
+    	var pid = req.param('pid');
+
+		if (authKey === '' || authKey === undefined) {
+			res.redirect('/');
+		} else {
+			keyAuth(authKey, function(msg) {
+				if(msg.error) {
+					res.redirect('/');
+				} else {
+					var ridePlans = msg.user.ridePlans;
+					var plan = ridePlans.id(pid);
+					var date = new Date(plan.timeStart);
+					plan.timeStart = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+					date = new Date(plan.timeEnd);
+					plan.timeEnd = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+
+					var records = plan.records;
+
+					for(var i in records) {
+						var p = records[i];
+						p.longitude = (p.longitude + '').substring(0, 7);
+						p.latitude = (p.latitude + '').substring(0, 7);
+						date = new Date(p.time);
+						p.time = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+					}
+
+					res.render('plans/record', {plan:plan, records:records});
+				}
+			});
+		}
+    });
+
 	app.get('/api/plan/:pid', function (req, res) {
 		var authKey = '';
 		if(req.session.authKey === '' || req.session.authKey === undefined) {
@@ -309,5 +359,7 @@ module.exports = function (app) {
 			});
 		}
     });
+
+
 
 };

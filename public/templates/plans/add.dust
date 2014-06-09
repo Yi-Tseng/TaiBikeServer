@@ -18,7 +18,7 @@
 	<i class="unordered shield icon"></i>
 	我的裝備
 </a>
-<a class="item scroll" href = '#'>
+<a class="item scroll" href = '/user/plan/records'>
 	<i class="globe icon"></i>
 	騎乘記錄
 </a>
@@ -212,10 +212,10 @@
 			</div>
 
 			<div class="ui green submit button" id='button-add' ng-click='submitPlan()'>新增計畫</div>
-		</div>
-		<div class="ui error message">
-			<div class="header">錯誤</div>
-			<p lingdex="15" id='msg'>[[errorMsg]]</p>
+			<div class="ui error message">
+				<div class="header">錯誤</div>
+				<p lingdex="15" id='msg'>[[errorMsg]]</p>
+			</div>
 		</div>
 	</div>
 </div>
