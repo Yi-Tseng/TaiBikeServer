@@ -1,6 +1,6 @@
 'use strict';
 var favicon = require('serve-favicon');
-
+var getAlert = require('./lib/rainAlert');
 var kraken = require('kraken-js'),
 	db = require('./lib/database'),
 	fs = require('fs'),
@@ -48,3 +48,10 @@ if (require.main === module) {
 
 
 module.exports = app;
+
+
+var CronJob = require('cron').CronJob;
+
+new CronJob('* */3 * * * *', function(){
+	getAlert(function(error, description) {});
+}, null, true, "Taiwan/Taipei");
